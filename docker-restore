@@ -1,0 +1,23 @@
+#!/bin/bash
+
+DIR="/home/$USER/data"
+
+if [ ! -d $DIR ]; then
+      mkdir -p "/home/$USER/data"
+fi
+
+if [ ! "$1" ]; then
+      echo "download file key required"
+      exit 1
+fi
+
+echo "downloading file ..."
+pipenv run python awspydownload.py -fileKey $1; CODE=$?;if [ $CODE != 0 ];then echo "python script exit with code $CODE"; exit 1; fi
+echo "download completed"
+echo "restoring image"
+sudo docker load -i ./$1;
+echo "restore complete"
+echo "removing downloaded file"
+sudo rm $1;
+echo "$1 image restored successfully."
+echo ":)  Please donate us :)"

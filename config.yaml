@@ -1,0 +1,3 @@
+awsKey: '' # enter s3 access key
+awsSecret: '' # enter s3 access key secret
+bucket: '' # enter bucket name to upload the backup container
