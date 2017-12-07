@@ -11,7 +11,7 @@ Docker-Backup is a unofficial tool to backup your container to cloud.
   - Python 2.7 or above with pip and pipenv required
   - Aws Simple Storage Service (S3)`*Config`
 
-### Setup Ennvironment
+### Setup Environment
 - `$ sudo ./setup`
 
 # Usage
