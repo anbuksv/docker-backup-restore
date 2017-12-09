@@ -24,10 +24,11 @@ echo "docker backup starting...."
 sudo docker commit -p $1 $IMAGE_NAME
 echo "compressing image $1 into tar file"
 sudo docker save -o ~/data/backupImage.tar $IMAGE_NAME
-echo "uploading image tar file into aws bucket"
+echo "uploading image file into aws bucket"
 sudo pipenv run python awspyupload.py -filePath ~/data/backupImage.tar -fileName $IMAGE_NAME ; CODE=$?;if [ $CODE != 0 ];then echo "python script exit with code $CODE"; exit 1; fi
+echo ""
 echo "docker image tar file upload completed"
-echo "...................................................."
+#echo "...................................................."
 echo "removing backup images from system"
 sudo docker rmi $IMAGE_NAME
 echo "removing backup file from system"

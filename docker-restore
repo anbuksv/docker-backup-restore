@@ -13,6 +13,7 @@ fi
 
 echo "downloading file ..."
 pipenv run python awspydownload.py -fileKey $1; CODE=$?;if [ $CODE != 0 ];then echo "python script exit with code $CODE"; exit 1; fi
+echo ""
 echo "download completed"
 echo "restoring image"
 sudo docker load -i ./$1;

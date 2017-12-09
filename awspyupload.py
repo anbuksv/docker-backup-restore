@@ -1,6 +1,9 @@
-import boto3,yaml
-from sys import argv,exit
+import boto3
+import yaml
+import os
+from sys import argv,exit,stdout
 
+UPLOADED_DATA = 0;
 def getopts(argv):
     opts = {}  # Empty dictionary to store key-value pairs.
     while argv:  # While there are arguments left to parse...
@@ -59,5 +62,13 @@ response = s3.list_buckets()
 
 #print("Bucket List: %s" % buckets)
 
+UPLOAD_FILE_SIZE = os.path.getsize(args['-filePath']);
+
+def callback(inp):
+    global UPLOADED_DATA;
+    UPLOADED_DATA = UPLOADED_DATA + inp;
+    stdout.write("\rUploaded "+ str(UPLOADED_DATA/1024) + "kb" + "/" + str(UPLOAD_FILE_SIZE/1024) + "kb");
+    stdout.flush();
+
 with open(args['-filePath'], 'rb') as data:
-    s3.upload_fileobj(data, bucket_name, args['-fileName'])
+    s3.upload_fileobj(data, bucket_name, args['-fileName'],None,callback)
