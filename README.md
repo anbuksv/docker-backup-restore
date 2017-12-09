@@ -12,7 +12,9 @@ Docker-Backup is a unofficial tool to backup your container to cloud.
   - Aws Simple Storage Service (S3)`*Config`
 
 ### Setup Environment
-- `$ sudo ./setup`
+>Execute following commands on your machine
+- `$ sudo pip install pipenv`
+- `$ sudo pipenv install`
 
 # Usage
 - `$ ./docker-backup {continer Id or name} {backup image name}`
