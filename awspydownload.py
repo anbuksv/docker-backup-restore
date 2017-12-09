@@ -1,6 +1,8 @@
 import boto3,yaml
 import botocore
-from sys import argv,exit
+from sys import argv,exit,stdout
+
+DOWNLOADED_DATA = 0;
 
 def getopts(argv):
     opts = {}  # Empty dictionary to store key-value pairs.
@@ -49,7 +51,11 @@ s3 = boto3.client(
 )
 
 def callback(inp):
-    print(str(inp/1024) + "Kb");
+    global DOWNLOADED_DATA;
+    DOWNLOADED_DATA = DOWNLOADED_DATA + inp;
+    stdout.write("\rdownloaded " + str(DOWNLOADED_DATA/1024) + "kb");
+    stdout.flush();
+   # print(str(inp/1024) + "Kb");
 
 try:
     s3.download_file(BUCKET_NAME, args['-fileKey'],args['-fileKey'],None,callback);
